@@ -29,7 +29,7 @@ def _commitback():
     if _dbhandle is None:
         raise Exception("Handle is None?")
     print "Commiting file to S3"
-    _gets3conn().put(_dbfile, pickle.dump(_dbhandle))
+    _gets3conn().put(_dbfile, pickle.dumps(_dbhandle))
 
 def _newdb():
     return {'matches': {}}
