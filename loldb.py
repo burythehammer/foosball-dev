@@ -5,6 +5,7 @@ import collections
 import datetime
 import simples3
 import traceback
+import os
 
 _dbfile = 'foosdb.pickle'
 _dbhandle = None
