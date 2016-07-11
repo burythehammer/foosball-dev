@@ -1,5 +1,5 @@
-name: OC foosbot
-description: OpenCredo's foosbot
+name: OC foosbot - dev
+description: Development branch for foosbot for testing/etc
 config:
   - name: LOG_LEVEL
     friendly_name: Severity level to show for logging.
@@ -20,8 +20,3 @@ config:
     default: none
     global: true
     default: none
-  - name: SECRET
-    friendly_name: Shhhh
-    info: This is an secret option
-    type: secret
-    default: not secret though
