@@ -1,6 +1,6 @@
 # Foosbot
 
-Foosbot is a Slack bot for recording foosball results and ranking players into a league. Players play pick-up games of first to 10, in any combination of 1v1 or 2v2 format and the bot will maintain a ranking order for the individual players.
+Foosbot is a Slack bot for recording foosball results and ranking players. Players play pick-up games of first to 10, in any combination of 1v1 or 2v2 format and the bot will maintain a ranking order for the individual players.
 
 # Installation
 
