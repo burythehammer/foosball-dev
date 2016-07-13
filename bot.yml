@@ -1,9 +1,19 @@
 name: OC foosbot - dev
 description: Development branch for foosbot for testing/etc
+
 config:
   - name: LOG_LEVEL
     friendly_name: Severity level to show for logging.
     info: See https://docs.python.org/2/library/logging.html#levels
+  - name: BOT_CHANNEL
+    friendly_name: Foosball Channel
+    info: Channel that foosbot will communicate in and log scores from
+  - name: ADMIN_USER
+    friendly_name: Foosbot admin user
+    info: User that foosbot reports errors to
+  - name: BOT_USERNAME
+    friendly_name: Foosbot username
+    info: Username that foosbot will report from
   - name: AWS_ACCESS_KEY
     friendly_name: AWS access key
     info: Access key for AWS

@@ -10,4 +10,4 @@ COPY . /src
 WORKDIR /src
 
 RUN pip install -r requirements.txt
-CMD python ./foosbot.py
+CMD ["python", "./foosbot.py"]

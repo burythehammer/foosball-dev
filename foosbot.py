@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import slacker
-# import json
 import websocket
 import slackparser
 import json
@@ -12,7 +11,6 @@ import yaml
 import datetime
 import os
 
-config = yaml.load(open('config.yaml'))
 slack_token = os.getenv("SLACK_TOKEN", "")
 slack = slacker.Slacker(slack_token)
 
@@ -20,7 +18,8 @@ slack = slacker.Slacker(slack_token)
 def getniceuser(users, n):
     uc = filter(lambda x: x['name'] == n, users)
     if len(uc) != 1:
-        print "Unable to find user %s in slack, please check your config" % (config['adminuser'])
+        print "Unable to find user %s in slack, please check your config" % (os.environ['ADMIN_USER'])
+
         sys.exit(1)
     else:
         print "User %s found with id %s" % (n, uc[0]['id'])
@@ -30,17 +29,17 @@ def getniceuser(users, n):
 def mangleconfig(config):
     # Sort out friendly names in config
     chans = slack.channels.list().body['channels']
-    cc = filter(lambda x: x['name'] == config['fooschan'], chans)
+    cc = filter(lambda x: x['name'] == os.environ['BOT_CHANNEL'], chans)
     if len(cc) != 1:
-        print "Unable to find channel %s in slack, please check your config" % (config['fooschan'])
+        print "Unable to find channel %s in slack, please check your config" % (os.environ['BOT_CHANNEL'])
         sys.exit(1)
     else:
-        print "Channel %s found with id %s" % (config['fooschan'], cc[0]['id'])
-        config['fooschan'] = cc[0]['id']
+        print "Channel %s found with id %s" % (os.environ['BOT_CHANNEL'], cc[0]['id'])
+        os.environ['BOT_CHANNEL'] = cc[0]['id']
 
     users = slack.users.list().body['members']
-    config['adminuser'] = getniceuser(users, config['adminuser'])
-    config['botuser'] = getniceuser(users, config['botuser'])
+    os.environ['ADMIN_USER'] = getniceuser(users, os.environ['ADMIN_USER'])
+    os.environ['BOT_USERNAME'] = getniceuser(users, os.environ['BOT_USERNAME'])
 
 
 def onrecv(ws, message):
@@ -48,7 +47,7 @@ def onrecv(ws, message):
     sendback = slackparser.processMessage(slack, config, message)
     # print sendback
     for s in sendback:
-        s['channel'] = config['fooschan']
+        s['channel'] = os.environ['BOT_CHANNEL']
         # print ss
         try:
             # print "SENDING", json.dumps(s)
