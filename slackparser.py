@@ -242,12 +242,12 @@ def processStats(slack, args, user):
     r1t = "Stats for %s" % nn
     div = '-' * (len(r1t))
     r1ta = "Skill level: %.1f" % (10.0 + (10.0 * td[uid]))
-    r2t = "Won, Lost, Played: %i" % (matchesStats)
+    r2t = "Won, Lost, Played: %i" % (matchStats)
     r2ta = "Last match: %s" % (formatMatch(allusers, lg))
 
     allt = [r1t, div, r1ta, r2t, r2ta]
 
-    if matchesStats[2] > 1:
+    if matchStats[2] > 1:
         r3t = "Best recent match: %s" % (formatMatch(allusers, bw[-1][1]))
         r4t = "Worst recent match: %s" % (formatMatch(allusers, bw[0][1]))
         allt.append(r3t)
