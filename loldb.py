@@ -54,24 +54,19 @@ def getgamecounts():
             r[p] += 1
     return r
 
-def getWinRatio(uid):
-    matches = getmatches()
+def getMatchStats(uid, matches = getmatches()):
     wins = 0
     matchCount = 0
     for m in matches:
         if uid in m.players1:
-            matchCount++;
+            matchCount += 1
             if m.score1 > m.score2:
-                wins++
-            else:
-                wins--
+                wins += 1
         elif uid in m.players2:
-            matchCount++;
+            matchCount += 1
             if m.score2 > m.score1:
-                wins++
-            else:
-                wins--
-    return wins / matchCount
+                wins += 1
+    return wins, matchCount - wins, matchCount
 
 def getlastgame(uid):
     matches = getmatches()
