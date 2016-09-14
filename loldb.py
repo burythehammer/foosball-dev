@@ -34,7 +34,6 @@ def _commitback():
 def _newdb():
     return {'matches': {}}
 
-
 def getrankings():
     return ranking.getRankings(_getdb()['matches'].values())
 
@@ -47,7 +46,6 @@ def getrecent(n=3):
     return sorted(_getdb()['matches'].values(),
                   key=lambda x: x.when, reverse=True)[:n]
 
-
 def getgamecounts():
     matches = getmatches()
     r = collections.defaultdict(int)
@@ -56,6 +54,24 @@ def getgamecounts():
             r[p] += 1
     return r
 
+def getWinRatio(uid):
+    matches = getmatches()
+    wins = 0
+    matchCount = 0
+    for m in matches:
+        if uid in m.players1:
+            matchCount++;
+            if m.score1 > m.score2:
+                wins++
+            else:
+                wins--
+        elif uid in m.players2:
+            matchCount++;
+            if m.score2 > m.score1:
+                wins++
+            else:
+                wins--
+    return wins / matchCount
 
 def getlastgame(uid):
     matches = getmatches()
